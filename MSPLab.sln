@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSPLab", "MSPLab\MSPLab.csproj", "{15D6B7BF-9B81-4428-9E8F-3EE73CDE196C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSPLib", "MSPLib\MSPLib.csproj", "{335308A4-DA6A-485E-BFDB-C2C68F66AFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibTester", "LibTester\LibTester.csproj", "{B4DE5686-9F56-407E-A6F8-AF3AED7A890E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +21,14 @@ Global
 		{15D6B7BF-9B81-4428-9E8F-3EE73CDE196C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15D6B7BF-9B81-4428-9E8F-3EE73CDE196C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15D6B7BF-9B81-4428-9E8F-3EE73CDE196C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{335308A4-DA6A-485E-BFDB-C2C68F66AFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335308A4-DA6A-485E-BFDB-C2C68F66AFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335308A4-DA6A-485E-BFDB-C2C68F66AFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335308A4-DA6A-485E-BFDB-C2C68F66AFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4DE5686-9F56-407E-A6F8-AF3AED7A890E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4DE5686-9F56-407E-A6F8-AF3AED7A890E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4DE5686-9F56-407E-A6F8-AF3AED7A890E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4DE5686-9F56-407E-A6F8-AF3AED7A890E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
