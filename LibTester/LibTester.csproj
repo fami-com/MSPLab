@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microcharts" Version="0.9.5.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MSPLib\MSPLib.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,0 @@
-<resources>
-    <string name="home">Home</string>
-    <string name="app_name">Lab Ivanov IO-81</string>
-    <string name="tab1_title">Student Info</string>
-    <string name="tab2_title">Second Tab</string>
-    <string name="tab1_text">Іванов Володимир\nІО-81\nЗК ІО-8109</string>
-    <string name="tab2_text">Empty Tab</string>
-</resources>

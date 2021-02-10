@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MSP_Lab.Views.ChartPage"
+             Title="Діаграма"
+             x:Name="chartPage">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Замінити на графік" BackgroundColor="{StaticResource Primary}" x:Name="chartSwitch" Clicked="OnClick"/>
+            <microcharts:ChartView x:Name="chartView" HeightRequest="350" VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

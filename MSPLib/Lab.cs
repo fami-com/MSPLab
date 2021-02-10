@@ -73,8 +73,10 @@ namespace MSPLib
 
         public static void Part2()
         {
+            Console.WriteLine("Частина 2");
+
             var defaultInit = new CoordinateVI();
-            Console.WriteLine($"{defaultInit} ; {defaultInit.ToDecimalString()}");
+            Console.WriteLine($"{nameof(defaultInit)} : {defaultInit} ; {defaultInit.ToDecimalString()}");
 
             var latitude1 = new CoordinateVI(Direction.Latitude, 85, 23, 56);
             var latitude2 = new CoordinateVI(Direction.Latitude, -67, 11, 34);
@@ -88,17 +90,19 @@ namespace MSPLib
                 Console.WriteLine(e.Message);
             }
 
-            Console.WriteLine($"{latitude1} ; {latitude1.ToDecimalString()}");
-            Console.WriteLine($"{latitude2} ; {latitude2.ToDecimalString()}");
+            Console.WriteLine($"{nameof(latitude1)} : {latitude1} ; {latitude1.ToDecimalString()}");
+            Console.WriteLine($"{nameof(latitude1)} : {latitude2} ; {latitude2.ToDecimalString()}");
 
             var avgLatitude1 = latitude1.Average(latitude2);
             var avgLatitude2 = CoordinateVI.Average(latitude2, avgLatitude1);
 
-            Console.WriteLine($"{avgLatitude1} ; {avgLatitude1.ToDecimalString()}");
-            Console.WriteLine($"{avgLatitude2} ; {avgLatitude2.ToDecimalString()}");
+            Console.WriteLine($"{nameof(avgLatitude1)} : {avgLatitude1} ; {avgLatitude1.ToDecimalString()}");
+            Console.WriteLine($"{nameof(avgLatitude2)} : {avgLatitude2} ; {avgLatitude2.ToDecimalString()}");
+
+            Console.WriteLine();
 
             var longitude1 = new CoordinateVI(Direction.Longitude, -8, 28, 47);
-            var longitude2 = new CoordinateVI(Direction.Latitude, 145, 32, 13);
+            var longitude2 = new CoordinateVI(Direction.Longitude, 145, 32, 13);
 
             try
             {
@@ -109,14 +113,14 @@ namespace MSPLib
                 Console.WriteLine(e.Message);
             }
 
-            Console.WriteLine($"{longitude1} ; {longitude1.ToDecimalString()}");
-            Console.WriteLine($"{longitude2} ; {longitude2.ToDecimalString()}");
+            Console.WriteLine($"{nameof(longitude1)} : {longitude1} ; {longitude1.ToDecimalString()}");
+            Console.WriteLine($"{nameof(longitude2)} : {longitude2} ; {longitude2.ToDecimalString()}");
 
             var avgLongitude1 = longitude1.Average(longitude2);
             var avgLongitude2 = CoordinateVI.Average(longitude2, avgLongitude1);
 
-            Console.WriteLine($"{avgLongitude1} ; {avgLongitude1.ToDecimalString()}");
-            Console.WriteLine($"{avgLongitude2} ; {avgLongitude2.ToDecimalString()}");
+            Console.WriteLine($"{nameof(avgLongitude1)} : {avgLongitude1} ; {avgLongitude1.ToDecimalString()}");
+            Console.WriteLine($"{nameof(avgLongitude2)} : {avgLongitude2} ; {avgLongitude2.ToDecimalString()}");
         }
 
         private static int RandomValue(int maxValue)
