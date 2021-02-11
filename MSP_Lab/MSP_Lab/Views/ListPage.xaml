@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MSP_Lab.Views"
+             x:Class="MSP_Lab.Views.ListPage"
+             Title="Книги">
+    <ContentPage.Content>
+        <ListView x:Name="booksView" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:BookCell Title="{Binding Title}" Subtitle="{Binding Subtitle}" Price="{Binding Price}" Isbn="{Binding ISBN}" Image="{Binding Image}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

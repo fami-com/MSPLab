@@ -7,13 +7,52 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Books\Image_01.png" />
+    <None Remove="Data\Books\Image_02.png" />
+    <None Remove="Data\Books\Image_03.png" />
+    <None Remove="Data\Books\Image_05.png" />
+    <None Remove="Data\Books\Image_06.png" />
+    <None Remove="Data\Books\Image_07.png" />
+    <None Remove="Data\Books\Image_08.png" />
+    <None Remove="Data\Books\Image_10.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\BooksList.json" />
+    <EmbeddedResource Include="Data\Books\Image_01.png" />
+    <EmbeddedResource Include="Data\Books\Image_02.png" />
+    <EmbeddedResource Include="Data\Books\Image_03.png" />
+    <EmbeddedResource Include="Data\Books\Image_05.png" />
+    <EmbeddedResource Include="Data\Books\Image_06.png" />
+    <EmbeddedResource Include="Data\Books\Image_07.png" />
+    <EmbeddedResource Include="Data\Books\Image_08.png" />
+    <EmbeddedResource Include="Data\Books\Image_10.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ChartPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
