@@ -145,4 +145,34 @@
   <data name="Image_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\books\image_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="_9780321856715" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9780321856715.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9780321862969" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9780321862969.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781118841471" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781118841471.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781430236054" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781430236054.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781430237105" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781430237105.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781430238072" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781430238072.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781430245124" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781430245124.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781430260226" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781430260226.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781449308360" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781449308360.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_9781449342753" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\books\9781449342753.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

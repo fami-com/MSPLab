@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MSP_Lab.Views.BookAddPage">
+    <ContentPage.Content>
+        <ScrollView Margin="10,10">
+            <StackLayout>
+                <Label Text="Title" FontSize="20"/>
+                <Entry x:Name="titleEntry"/>
+
+                <Label Text="Subtitle" FontSize="20"/>
+                <Entry x:Name="subtitleEntry"/>
+
+                <Label Text="ISBN" FontSize="20"/>
+                <Entry x:Name="isbnEntry"/>
+
+                <Label Text="Price" FontSize="20"/>
+                <Entry x:Name="priceEntry"/>
+
+                <Button Text="Submit" Clicked="OnSubmit"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

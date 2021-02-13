@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MSP_Lab.Views.BookInfoPage">
+    <ContentPage.Content>
+        <StackLayout Margin="10,10">
+            <StackLayout>
+                <Label x:Name="bookTitle" FontSize="22" TextColor="Black"/>
+                <Label x:Name="bookSubtitle" FontSize="16" TextColor="#666"/>
+                <Label x:Name="bookYear" FontSize="12"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Image x:Name="bookCover"/>
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Label x:Name="bookPages"/>
+                    <Label x:Name="bookRating"/>
+                    <Label x:Name="bookAuthors"/>
+                    <Label x:Name="bookPublisherInfo"/>
+                </StackLayout>
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Label x:Name="bookPrice" HorizontalTextAlignment="End" LineBreakMode="NoWrap"/>
+                    <Label x:Name="bookIsbn" HorizontalTextAlignment="End" LineBreakMode="NoWrap"/>
+                </StackLayout>
+            </StackLayout>
+            <Label x:Name="bookDesc"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -63,6 +63,106 @@ namespace MSP_Lab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] _9780321856715 {
+            get {
+                object obj = ResourceManager.GetObject("_9780321856715", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9780321862969 {
+            get {
+                object obj = ResourceManager.GetObject("_9780321862969", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781118841471 {
+            get {
+                object obj = ResourceManager.GetObject("_9781118841471", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781430236054 {
+            get {
+                object obj = ResourceManager.GetObject("_9781430236054", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781430237105 {
+            get {
+                object obj = ResourceManager.GetObject("_9781430237105", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781430238072 {
+            get {
+                object obj = ResourceManager.GetObject("_9781430238072", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781430245124 {
+            get {
+                object obj = ResourceManager.GetObject("_9781430245124", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781430260226 {
+            get {
+                object obj = ResourceManager.GetObject("_9781430260226", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781449308360 {
+            get {
+                object obj = ResourceManager.GetObject("_9781449308360", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] _9781449342753 {
+            get {
+                object obj = ResourceManager.GetObject("_9781449342753", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] BooksList {
             get {
                 object obj = ResourceManager.GetObject("BooksList", resourceCulture);

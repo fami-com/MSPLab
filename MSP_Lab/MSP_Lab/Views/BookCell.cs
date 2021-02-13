@@ -18,7 +18,7 @@ namespace MSP_Lab.Views
 
         public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(BookCell), "Title");
         public static readonly BindableProperty SubtitleProperty = BindableProperty.Create("Subtitle", typeof(string), typeof(BookCell), "Subtitle");
-        public static readonly BindableProperty PriceProperty = BindableProperty.Create("Price", typeof(string), typeof(BookCell), "Price");
+        public static readonly BindableProperty PriceProperty = BindableProperty.Create("Price", typeof(decimal?), typeof(BookCell), null);
         public static readonly BindableProperty IsbnProperty = BindableProperty.Create("Isbn", typeof(string), typeof(BookCell), "Isbn");
         public static readonly BindableProperty ImageProperty = BindableProperty.Create("Image", typeof(string), typeof(BookCell), "Image");
 
@@ -34,9 +34,9 @@ namespace MSP_Lab.Views
             set => SetValue(SubtitleProperty, value);
         }
         
-        public string Price
+        public decimal? Price
         {
-            get => (string)GetValue(PriceProperty);
+            get => (decimal?)GetValue(PriceProperty);
             set => SetValue(PriceProperty, value);
         }
 
@@ -60,7 +60,7 @@ namespace MSP_Lab.Views
             {
                 titleLabel.Text = Title;
                 subtitleLabel.Text = Subtitle;
-                priceLabel.Text = Price;
+                priceLabel.Text = !(Price is null) ? $"${Price}" : "Invalid Price";
                 isbnLabel.Text = Isbn;
                 image.Source = ImageSource.FromResource("MSP_Lab.Data.Books." + Image, typeof(BookCell).GetTypeInfo().Assembly);
             }

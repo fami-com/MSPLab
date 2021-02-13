@@ -1,12 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <Company>MSP_Lab</Company>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Books\9780321856715.json" />
+    <None Remove="Data\Books\9780321862969.json" />
+    <None Remove="Data\Books\9781118841471.json" />
+    <None Remove="Data\Books\9781430236054.json" />
+    <None Remove="Data\Books\9781430237105.json" />
+    <None Remove="Data\Books\9781430238072.json" />
+    <None Remove="Data\Books\9781430245124.json" />
+    <None Remove="Data\Books\9781430260226.json" />
+    <None Remove="Data\Books\9781449308360.json" />
+    <None Remove="Data\Books\9781449342753.json" />
     <None Remove="Data\Books\Image_01.png" />
     <None Remove="Data\Books\Image_02.png" />
     <None Remove="Data\Books\Image_03.png" />
@@ -18,6 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Data\Books\9780321856715.json" />
+    <EmbeddedResource Include="Data\Books\9780321862969.json" />
+    <EmbeddedResource Include="Data\Books\9781118841471.json" />
+    <EmbeddedResource Include="Data\Books\9781430236054.json" />
+    <EmbeddedResource Include="Data\Books\9781430237105.json" />
+    <EmbeddedResource Include="Data\Books\9781430238072.json" />
+    <EmbeddedResource Include="Data\Books\9781430245124.json" />
+    <EmbeddedResource Include="Data\Books\9781430260226.json" />
+    <EmbeddedResource Include="Data\Books\9781449308360.json" />
+    <EmbeddedResource Include="Data\Books\9781449342753.json" />
     <EmbeddedResource Include="Data\BooksList.json" />
     <EmbeddedResource Include="Data\Books\Image_01.png" />
     <EmbeddedResource Include="Data\Books\Image_02.png" />
@@ -37,6 +57,39 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Data\Books\9780321856715.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9780321862969.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781118841471.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781430236054.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781430237105.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781430238072.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781430245124.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781430260226.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781449308360.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Books\9781449342753.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -48,6 +101,12 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BookAddPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BookInfoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ChartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
