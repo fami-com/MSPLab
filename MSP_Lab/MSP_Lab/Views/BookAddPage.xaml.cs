@@ -14,10 +14,10 @@ namespace MSP_Lab.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookAddPage : ContentPage
     {
-        private readonly Action<Book> method;
+        private readonly Action<Book> _method;
         public BookAddPage(Action<Book> invokable)
         {
-            method = invokable;
+            _method = invokable;
             InitializeComponent();
         }
 
@@ -41,7 +41,7 @@ namespace MSP_Lab.Views
             var book = new Book
             {
                 Image = "",
-                ISBN = isbn,
+                Isbn = isbn,
                 Price = price,
                 Subtitle = subtitle,
                 Title = title
@@ -49,7 +49,7 @@ namespace MSP_Lab.Views
 
             Console.WriteLine(book);
 
-            method(book);
+            _method(book);
             await Navigation.PopAsync();
         }
     }

@@ -12,7 +12,7 @@ namespace MSPLib
     }
 
 
-    public class CoordinateVI
+    public class CoordinateVi
     {
         public Direction Direction;
 
@@ -20,7 +20,7 @@ namespace MSPLib
         public readonly uint Minutes;
         public readonly uint Seconds;
 
-        public CoordinateVI()
+        public CoordinateVi()
         {
             Degrees = 0;
             Minutes = 0;
@@ -29,7 +29,7 @@ namespace MSPLib
             Direction = Direction.Latitude;
         }
 
-        public CoordinateVI(Direction direction, int degrees, uint minutes, uint seconds)
+        public CoordinateVi(Direction direction, int degrees, uint minutes, uint seconds)
         {
 
             if (direction == Direction.Latitude && (degrees < -90 || degrees > 90))
@@ -94,16 +94,16 @@ namespace MSPLib
             return $"{Degrees + Minutes / 60f + Seconds / 3600f}° {dir}";
         }
 
-        public CoordinateVI Average(CoordinateVI rhs)
+        public CoordinateVi Average(CoordinateVi rhs)
         {
             return Average(this, rhs);
         }
 
-        public static CoordinateVI Average(CoordinateVI lhs, CoordinateVI rhs)
+        public static CoordinateVi Average(CoordinateVi lhs, CoordinateVi rhs)
         {
             if (lhs.Direction != rhs.Direction) return null;
 
-            return new CoordinateVI(lhs.Direction, (lhs.Degrees + rhs.Degrees) / 2, (lhs.Minutes + rhs.Minutes) / 2, (lhs.Seconds + rhs.Seconds) / 2);
+            return new CoordinateVi(lhs.Direction, (lhs.Degrees + rhs.Degrees) / 2, (lhs.Minutes + rhs.Minutes) / 2, (lhs.Seconds + rhs.Seconds) / 2);
         }
     }
 }

@@ -10,11 +10,11 @@ namespace MSP_Lab.Views
 {
     class BookCell : ViewCell
     {
-        private Label titleLabel;
-        private Label subtitleLabel;
-        private Label priceLabel;
-        private Label isbnLabel;
-        private Image image;
+        private Label _titleLabel;
+        private Label _subtitleLabel;
+        private Label _priceLabel;
+        private Label _isbnLabel;
+        private Image _image;
 
         public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(BookCell), "Title");
         public static readonly BindableProperty SubtitleProperty = BindableProperty.Create("Subtitle", typeof(string), typeof(BookCell), "Subtitle");
@@ -58,40 +58,40 @@ namespace MSP_Lab.Views
 
             if (BindingContext != null)
             {
-                titleLabel.Text = Title;
-                subtitleLabel.Text = Subtitle;
-                priceLabel.Text = !(Price is null) ? $"${Price}" : "Invalid Price";
-                isbnLabel.Text = Isbn;
-                image.Source = ImageSource.FromResource("MSP_Lab.Data.Books." + Image, typeof(BookCell).GetTypeInfo().Assembly);
+                _titleLabel.Text = Title;
+                _subtitleLabel.Text = Subtitle;
+                _priceLabel.Text = !(Price is null) ? $"${Price}" : "Invalid Price";
+                _isbnLabel.Text = Isbn;
+                _image.Source = ImageSource.FromUri(new Uri(Image));
             }
         }
 
         public BookCell()
         {
-            titleLabel = new Label() {HorizontalTextAlignment = TextAlignment.Start };
-            subtitleLabel = new Label() { HorizontalTextAlignment = TextAlignment.Start, FontSize = 12, TextColor = Color.Gray };
-            priceLabel = new Label() { HorizontalTextAlignment = TextAlignment.End, LineBreakMode= LineBreakMode.NoWrap };
-            isbnLabel = new Label() { HorizontalTextAlignment = TextAlignment.End, LineBreakMode = LineBreakMode.NoWrap, TextColor = Color.Gray };
-            image = new Image() { HorizontalOptions = LayoutOptions.Start };
+            _titleLabel = new Label() {HorizontalTextAlignment = TextAlignment.Start };
+            _subtitleLabel = new Label() { HorizontalTextAlignment = TextAlignment.Start, FontSize = 12, TextColor = Color.Gray };
+            _priceLabel = new Label() { HorizontalTextAlignment = TextAlignment.End, LineBreakMode= LineBreakMode.NoWrap };
+            _isbnLabel = new Label() { HorizontalTextAlignment = TextAlignment.End, LineBreakMode = LineBreakMode.NoWrap, TextColor = Color.Gray };
+            _image = new Image() { HorizontalOptions = LayoutOptions.Start };
 
-            titleLabel.SetBinding(Label.TextProperty, "title");
-            subtitleLabel.SetBinding(Label.TextProperty, "subtitle");
-            priceLabel.SetBinding(Label.TextProperty, "price");
-            isbnLabel.SetBinding(Label.TextProperty, "isbn");
-            image.SetBinding(Xamarin.Forms.Image.SourceProperty, "image");
+            _titleLabel.SetBinding(Label.TextProperty, "title");
+            _subtitleLabel.SetBinding(Label.TextProperty, "subtitle");
+            _priceLabel.SetBinding(Label.TextProperty, "price");
+            _isbnLabel.SetBinding(Label.TextProperty, "isbn");
+            _image.SetBinding(Xamarin.Forms.Image.SourceProperty, "image");
 
             var dataLayout = new StackLayout() { HorizontalOptions=LayoutOptions.FillAndExpand, Margin = new Thickness(5, 1) };
             var metadataLayout = new StackLayout() { HorizontalOptions = LayoutOptions.EndAndExpand, Margin = new Thickness(5, 1) };
             var horizontal = new StackLayout() { Orientation = StackOrientation.Horizontal };
             var wrapper = new StackLayout() { Margin = new Thickness(5, 2) };
 
-            dataLayout.Children.Add(titleLabel);
-            dataLayout.Children.Add(subtitleLabel);
+            dataLayout.Children.Add(_titleLabel);
+            dataLayout.Children.Add(_subtitleLabel);
 
-            metadataLayout.Children.Add(priceLabel);
-            metadataLayout.Children.Add(isbnLabel);
+            metadataLayout.Children.Add(_priceLabel);
+            metadataLayout.Children.Add(_isbnLabel);
 
-            horizontal.Children.Add(image);
+            horizontal.Children.Add(_image);
             horizontal.Children.Add(dataLayout);
             horizontal.Children.Add(metadataLayout);
 

@@ -14,7 +14,7 @@ namespace MSP_Lab.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookInfoPage : ContentPage
     {
-        private BookDetails details;
+        private BookDetails _details;
 
         //public BookInfoPage()
         //{
@@ -24,7 +24,7 @@ namespace MSP_Lab.Views
 
         public BookInfoPage(BookDetails det)
         {
-            details = det;
+            _details = det;
             InitializeComponent();
         }
 
@@ -32,17 +32,17 @@ namespace MSP_Lab.Views
         {
             base.OnAppearing();
 
-            bookTitle.Text = details.Title;
-            bookSubtitle.Text = details.Subtitle;
-            bookYear.Text = details.Year.ToString();
-            bookAuthors.Text = "Authors: " + string.Join(", ", details.Authors);
-            bookIsbn.Text = details.ISBN;
-            bookPages.Text = $"Pages: {details.Pages}";
-            bookPrice.Text = !(details.Price is null) ? $"${details.Price}" : "Invalid Price";
-            bookPublisherInfo.Text = $"Published by {details.Publisher}";
-            bookDesc.Text = details.Description;
-            bookRating.Text = $"{details.Rating}/5";
-            bookCover.Source = ImageSource.FromResource("MSP_Lab.Data.Books." + details.Image, typeof(BookInfoPage).GetTypeInfo().Assembly);
+            bookTitle.Text = _details.Title;
+            bookSubtitle.Text = _details.Subtitle;
+            bookYear.Text = _details.Year.ToString();
+            bookAuthors.Text = "Authors: " + string.Join(", ", _details.Authors);
+            bookIsbn.Text = _details.Isbn;
+            bookPages.Text = $"Pages: {_details.Pages}";
+            bookPrice.Text = !(_details.Price is null) ? $"${_details.Price}" : "Invalid Price";
+            bookPublisherInfo.Text = $"Published by {_details.Publisher}";
+            bookDesc.Text = _details.Description;
+            bookRating.Text = $"{_details.Rating}/5";
+            bookCover.Source = ImageSource.FromUri(new Uri(_details.Image));
         }
     }
 }

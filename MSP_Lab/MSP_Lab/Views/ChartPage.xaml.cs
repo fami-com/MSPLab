@@ -13,10 +13,10 @@ namespace MSP_Lab.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChartPage : ContentPage
     {
-        private static readonly PieChart pieChart = new PieChart { Entries = Data.ChartData.PieEntries, LabelMode = LabelMode.None,  };
-        private static readonly LineChart lineChart = new LineChart { Entries = Data.ChartData.LineEntries, LineSize = 3, LineMode = LineMode.Straight, PointMode = PointMode.None };
+        private static readonly PieChart _pieChart = new PieChart { Entries = Data.ChartData.PieEntries, LabelMode = LabelMode.None,  };
+        private static readonly LineChart _lineChart = new LineChart { Entries = Data.ChartData.LineEntries, LineSize = 3, LineMode = LineMode.Straight, PointMode = PointMode.None };
 
-        bool switched = false;
+        bool _switched = false;
 
         public ChartPage()
         {
@@ -27,25 +27,25 @@ namespace MSP_Lab.Views
         {
             base.OnAppearing();
 
-            chartView.Chart = pieChart;
+            chartView.Chart = _pieChart;
         }
 
         void OnClick(object sender, EventArgs e)
         {
-            if (switched)
+            if (_switched)
             {
-                chartView.Chart = pieChart;
+                chartView.Chart = _pieChart;
                 chartSwitch.Text = "Замінити на графік";
                 chartPage.Title = "Діаграма";
             }
             else
             {
-                chartView.Chart = lineChart;
+                chartView.Chart = _lineChart;
                 chartSwitch.Text = "Замінити на діаграму";
                 chartPage.Title = "Графік";
             }
 
-            switched = !switched;
+            _switched = !_switched;
         }
 
         protected override void OnSizeAllocated(double width, double height)

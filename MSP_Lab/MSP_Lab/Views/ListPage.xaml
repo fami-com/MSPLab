@@ -15,17 +15,14 @@
             <ListView x:Name="booksView" HasUnevenRows="True" ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <local:BookCell Title="{Binding Title}" Subtitle="{Binding Subtitle}" Price="{Binding Price}" Isbn="{Binding ISBN}" Image="{Binding Image}" >
+                        <local:BookCell Title="{Binding Title}" Subtitle="{Binding Subtitle}" Price="{Binding Price}" Isbn="{Binding Isbn}" Image="{Binding Image}" >
                             <local:BookCell.ContextActions>
                                 <MenuItem IconImageSource="icon_delete.png" Clicked="OnDelete" CommandParameter="{Binding .}"/>
-                            </local:BookCell.ContextActions> 
+                            </local:BookCell.ContextActions>
                         </local:BookCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout x:Name="booksEmpty" IsVisible="False">
-                <Label Text="No items found"/>
-            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -7,9 +7,9 @@ namespace MSPLib
 {
     public class Lab
     {
-        private static readonly int[] points = new[] { 12, 12, 12, 12, 12, 12, 12, 16 };
+        private static readonly int[] _points = new[] { 12, 12, 12, 12, 12, 12, 12, 16 };
 
-        private static readonly Random rnd = new Random();
+        private static readonly Random _rnd = new Random();
 
 
         public static void Part1()
@@ -26,7 +26,7 @@ namespace MSPLib
             }
             Console.WriteLine();
          
-            var studentPoints = studentsGroups.ToDictionary(x => x.Key, x => x.Value.ToDictionary(t => t, t => points.Select(y => RandomValue(y)).ToList()));
+            var studentPoints = studentsGroups.ToDictionary(x => x.Key, x => x.Value.ToDictionary(t => t, t => _points.Select(y => RandomValue(y)).ToList()));
 
             Console.WriteLine("Завдання 2");
             foreach (var p in studentPoints)
@@ -75,15 +75,15 @@ namespace MSPLib
         {
             Console.WriteLine("Частина 2");
 
-            var defaultInit = new CoordinateVI();
+            var defaultInit = new CoordinateVi();
             Console.WriteLine($"{nameof(defaultInit)} : {defaultInit} ; {defaultInit.ToDecimalString()}");
 
-            var latitude1 = new CoordinateVI(Direction.Latitude, 85, 23, 56);
-            var latitude2 = new CoordinateVI(Direction.Latitude, -67, 11, 34);
+            var latitude1 = new CoordinateVi(Direction.Latitude, 85, 23, 56);
+            var latitude2 = new CoordinateVi(Direction.Latitude, -67, 11, 34);
 
             try
             {
-                var invalidLatitude = new CoordinateVI(Direction.Latitude, 100, 84, 120);
+                var invalidLatitude = new CoordinateVi(Direction.Latitude, 100, 84, 120);
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -94,19 +94,19 @@ namespace MSPLib
             Console.WriteLine($"{nameof(latitude1)} : {latitude2} ; {latitude2.ToDecimalString()}");
 
             var avgLatitude1 = latitude1.Average(latitude2);
-            var avgLatitude2 = CoordinateVI.Average(latitude2, avgLatitude1);
+            var avgLatitude2 = CoordinateVi.Average(latitude2, avgLatitude1);
 
             Console.WriteLine($"{nameof(avgLatitude1)} : {avgLatitude1} ; {avgLatitude1.ToDecimalString()}");
             Console.WriteLine($"{nameof(avgLatitude2)} : {avgLatitude2} ; {avgLatitude2.ToDecimalString()}");
 
             Console.WriteLine();
 
-            var longitude1 = new CoordinateVI(Direction.Longitude, -8, 28, 47);
-            var longitude2 = new CoordinateVI(Direction.Longitude, 145, 32, 13);
+            var longitude1 = new CoordinateVi(Direction.Longitude, -8, 28, 47);
+            var longitude2 = new CoordinateVi(Direction.Longitude, 145, 32, 13);
 
             try
             {
-                var invalidLongitude = new CoordinateVI(Direction.Longitude, 200, 84, 120);
+                var invalidLongitude = new CoordinateVi(Direction.Longitude, 200, 84, 120);
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -117,7 +117,7 @@ namespace MSPLib
             Console.WriteLine($"{nameof(longitude2)} : {longitude2} ; {longitude2.ToDecimalString()}");
 
             var avgLongitude1 = longitude1.Average(longitude2);
-            var avgLongitude2 = CoordinateVI.Average(longitude2, avgLongitude1);
+            var avgLongitude2 = CoordinateVi.Average(longitude2, avgLongitude1);
 
             Console.WriteLine($"{nameof(avgLongitude1)} : {avgLongitude1} ; {avgLongitude1.ToDecimalString()}");
             Console.WriteLine($"{nameof(avgLongitude2)} : {avgLongitude2} ; {avgLongitude2.ToDecimalString()}");
@@ -125,7 +125,7 @@ namespace MSPLib
 
         private static int RandomValue(int maxValue)
         {
-            switch (rnd.Next(6))
+            switch (_rnd.Next(6))
             {
                 case 1:
                     return (int)Math.Ceiling(maxValue * 0.7);

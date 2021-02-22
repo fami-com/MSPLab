@@ -1,12 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 x:Class="$NAMESPACE$.$CLASS$">
+             xmlns:local="clr-namespace:MSP_Lab.Views"
+             x:Class="MSP_Lab.Views.GalleryPage"
+             Title="Галерея">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_plus.png" Order="Primary" Clicked="OnAddItem"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Hello, world!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ScrollView>
+                <local:GalleryGridLayout HorizontalOptions="FillAndExpand" x:Name="galleryLayout" Margin="5">
+                    
+                </local:GalleryGridLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -11,13 +11,13 @@ namespace MSP_Lab.Models
 
         public string Title { get; set; }
         public string Subtitle { get; set; }
-        public string ISBN { get; set; }
+        public string Isbn { get; set; }
         public decimal? Price { get; set; }
         public string Image { get => _image; set => _image = value == "" ? null : value; }
 
         public bool Equals(Book other)
         {
-            return Title == other.Title && Subtitle == other.Subtitle && ISBN == other.ISBN && Price == other.Price;
+            return Title == other.Title && Subtitle == other.Subtitle && Isbn == other.Isbn && Price == other.Price;
         }
 
         public override bool Equals(object obj)
@@ -37,12 +37,12 @@ namespace MSP_Lab.Models
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Title, Subtitle, ISBN, Price);
+            return HashCode.Combine(Title, Subtitle, Isbn, Price);
         }
 
         public override string ToString()
         {
-            return $"Book {{Title = {Title}, Subtitle = {Subtitle}, Price = {Price}, ISBN = {ISBN}}}";
+            return $"Book {{Title = {Title}, Subtitle = {Subtitle}, Price = {Price}, ISBN = {Isbn}}}";
         }
     }
 }

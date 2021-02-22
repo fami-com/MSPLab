@@ -1,109 +1,90 @@
-﻿using MSP_Lab.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Reflection;
+using MSP_Lab.Models;
+using MSP_Lab.Properties;
 using Newtonsoft.Json;
-
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Newtonsoft.Json.Linq;
-using System.Resources;
-using System.Globalization;
-using System.Collections;
-using System.Collections.ObjectModel;
 
 namespace MSP_Lab.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListPage : ContentPage
     {
-        private List<Book> books;
-        private ObservableCollection<Book> display;
+        private List<Book> _books;
+        private ObservableCollection<Book> _display;
 
-        private Book _book;
+        private const string _searchUrl = "https://api.itbook.store/1.0/search/{0}";
+        private const string _detailsUrl = "https://api.itbook.store/1.0/books/{0}";
+
+        private readonly HttpClient _client;
 
         public ListPage()
         {
             InitializeComponent();
 
-            books = new List<Book>();
-            display = new ObservableCollection<Book>();
+            _client = new HttpClient();
 
-
-            booksView.ItemsSource = display;
-
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(Properties.Resources)).Assembly;
-
-            var c = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            c.NumberFormat.CurrencySymbol = "$";
-            CultureInfo.CurrentCulture = c;
-
-            using (var stream = assembly.GetManifestResourceStream("MSP_Lab.Data.BooksList.json"))
-            using (var streamReader = new StreamReader(stream))
-            using (var reader = new JsonTextReader(streamReader))
-            {
-                var a = JObject.Load(reader);
-                a["books"].Select(v => new Book
-                {
-                    Title = (string)v["title"],
-                    Subtitle = (string)v["subtitle"],
-                    ISBN = (string)v["isbn13"],
-                    Price = decimal.TryParse((string)v["price"], NumberStyles.Currency, CultureInfo.CurrentCulture, out var t) ? (decimal?)t : null,
-                    Image = (string)v["image"]
-                }).OrderBy(x => x.Title).ToList().ForEach(AddBook);
-            }
+            _books = new List<Book>();
+            _display = new ObservableCollection<Book>();
+            
+            booksView.ItemsSource = _display;
         }
 
         private void AddBook(Book book)
         {
-            Console.WriteLine("!!!!!!!!!!!!!!! {0} {1}", books.Count, display.Count);
-
-            _book = book;
-
-            Console.WriteLine("!!!!!!!!!!!!!!! {0}", _book);
-
-            books.Add(book);
-            display.Add(book);
-
-
-            Console.WriteLine("!!!!!!!!!!!!!!! {0} {1}", books.Count, display.Count);
+            _display.Add(book);
         }
 
         private void DeleteBook(Book book)
         {
-            books.Remove(book);
-            display.Remove(book);
-
+            _display.Remove(book);
         }
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            Console.WriteLine("!!!!!!!!!!!!!!! {0} {1}", books.Count, display.Count);
-
-        }
-
-        private void OnTextChanged(object sender, EventArgs e)
+        private async void OnTextChanged(object sender, EventArgs e)
         {
             var searchBar = (SearchBar)sender;
             var search = searchBar.Text;
 
-            var t = books.Where(b => b.Title.Contains(search, StringComparison.CurrentCultureIgnoreCase));
-            if (t.Any())
+            _display.Clear();
+
+            if (search.Length < 3) return;
+
+            var text = search.Replace(' ', '+');
+
+            var response = await _client.GetAsync(string.Format(_searchUrl, text));
+
+            if (!response.IsSuccessStatusCode)
             {
-                display.Clear();
-                t.ToList().ForEach(i => display.Add(i));
-                booksEmpty.IsVisible = false;
-                booksView.IsVisible = true;
-            } else
+                await DisplayAlert("Error", "Error", "Ok");
+                return;
+            }
+
+            using var data = await response.Content.ReadAsStreamAsync();
+            using var streamReader = new StreamReader(data);
+            using var reader = new JsonTextReader(streamReader);
+
+            var a = await JObject.LoadAsync(reader);
+
+            var t = a["books"].Select(v => new Book
             {
-                booksView.IsVisible = false;
-                booksEmpty.IsVisible = true;
+                Title = (string)v["title"],
+                Subtitle = (string)v["subtitle"],
+                Isbn = (string)v["isbn13"],
+                Price = decimal.TryParse((string)v["price"], NumberStyles.Currency, CultureInfo.CurrentCulture, out var t) ? (decimal?)t : null,
+                Image = (string)v["image"]
+            });
+
+            foreach(var b in t)
+            {
+                AddBook(b);
             }
         }
 
@@ -114,36 +95,38 @@ namespace MSP_Lab.Views
 
             try
             {
-                var assembly = IntrospectionExtensions.GetTypeInfo(typeof(Properties.Resources)).Assembly;
+                var response = await _client.GetAsync(string.Format(_detailsUrl, book.Isbn));
 
-                BookDetails details;
+                response.EnsureSuccessStatusCode();
 
-                using (var stream = assembly.GetManifestResourceStream($"MSP_Lab.Data.Books.{book.ISBN}.json"))
-                using (var streamReader = new StreamReader(stream))
-                using (var reader = new JsonTextReader(streamReader))
+                using var data = await response.Content.ReadAsStreamAsync();
+                using var streamReader = new StreamReader(data);
+                using var reader = new JsonTextReader(streamReader);
+                
+                var a = await JObject.LoadAsync(reader);
+
+                Console.WriteLine(a);
+
+                var details = new BookDetails
                 {
-                    var a = await JObject.LoadAsync(reader);
-                    details = new BookDetails
-                    {
-                        Authors = ((string)a["authors"]).Split(',').Select(x => x.Trim()).ToArray(),
-                        Description = (string)a["desc"],
-                        Image = (string)a["image"],
-                        ISBN = (string)a["isbn13"],
-                        Pages = int.Parse((string)a["pages"]),
-                        Price = decimal.TryParse((string)a["price"], NumberStyles.Currency, CultureInfo.CurrentCulture, out var t) ? (decimal?)t : null,
-                        Publisher = (string)a["publisher"],
-                        Rating = int.Parse((string)a["rating"]),
-                        Subtitle = (string)a["subtitle"],
-                        Title = (string)a["title"],
-                        Year = int.Parse((string)a["year"])
-                    };
-                }
-
+                    Authors = ((string)a["authors"])?.Split(',').Select(x => x.Trim()).ToArray(),
+                    Description = (string)a["desc"],
+                    Image = (string)a["image"],
+                    Isbn = (string)a["isbn13"],
+                    Pages = int.Parse(((string)a["pages"])!),
+                    Price = decimal.TryParse((string)a["price"], NumberStyles.Currency, CultureInfo.CurrentCulture, out var t) ? (decimal?)t : null,
+                    Publisher = (string)a["publisher"],
+                    Rating = int.Parse(((string)a["rating"])!) ,
+                    Subtitle = (string)a["subtitle"],
+                    Title = (string)a["title"],
+                    Year = int.Parse(((string)a["year"])!)
+                };
+                
                 await Navigation.PushAsync(new BookInfoPage(details));
             }
-            catch (ArgumentNullException)
+            catch (HttpRequestException)
             {
-                await DisplayAlert("Error", $"Details for book {book.ISBN} not found", "OK");
+                await DisplayAlert("Error", $"Details for book {book.Isbn} not found", "OK");
             }
         }
 
@@ -155,10 +138,7 @@ namespace MSP_Lab.Views
 
         private async void OnAddItem(object sender, EventArgs e)
         {
-            Console.WriteLine("!!!!!!!!!!!!!!! {0} {1}", books.Count, display.Count);
             await Navigation.PushAsync(new BookAddPage(AddBook));
-            Console.WriteLine("!!!!!!!!!!!!!!! {0}", _book);
-            Console.WriteLine("!!!!!!!!!!!!!!! {0} {1}", books.Count, display.Count);
         }
     }
 }

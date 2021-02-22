@@ -15,10 +15,17 @@ namespace MSP_Lab.Views
         {
             base.OnSizeAllocated(width, height);
 
+            if (_size == width / 3) return;
+
             _size = width / 3;
+
+            var gridAmount = 0;
+            var cnt = 0;
+
             foreach (var ch in Children)
             {
-                SetBounds(ch);
+                SetBounds(ch, cnt, ref gridAmount);
+                cnt++;
             }
         }
 
@@ -31,51 +38,60 @@ namespace MSP_Lab.Views
                 Margin = margin
             };
             
-            SetBounds(img);
+            SetBounds(img, _imageAmount, ref _gridAmount);
             Children.Add(img);
             _imageAmount++;
         }
 
-        private void SetBounds(BindableObject view)
+        private void SetBounds(BindableObject view, int imageAmount, ref int gridAmount)
         {
             double x, y;
-            double width = _size, height = _size;
+            double width, height;
 
-            var mod = _imageAmount % 9;
+            var mod = imageAmount % 9;
 
-            switch (mod)
+            x = mod switch
             {
-                case 0:
-                case 1:
-                case 2:
-                    x = mod * _size;
-                    y = 0;
-                    break;
-                case 3:
-                    x = 0;
-                    y = _size;
-                    break;
-                case 4:
-                    x = y = _size;
-                    width = height = _size * 2;
-                    break;
-                case 5:
-                    x = 0;
-                    y = _size * 2;
-                    break;
-                case 8:
-                    _gridAmount++;
-                    goto case 7;
-                case 6:
-                case 7:
-                    x = (mod - 6) * _size;
-                    y = _size * 3;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                0 => 0,
+                1 => 1,
+                2 => 2,
+                3 => 0,
+                4 => 1,
+                5 => 0,
+                6 => 0,
+                7 => 1,
+                8 => 2,
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
-            y += _gridAmount * 4 * _size;
+            y = mod switch
+            {
+                0 => 0,
+                1 => 0,
+                2 => 0,
+                3 => 1,
+                4 => 1,
+                5 => 2,
+                6 => 3,
+                7 => 3,
+                8 => 3,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            width = height = mod switch
+            {
+                4 => 2,
+                _ => 1
+            };
+
+            y += gridAmount * 4;
+
+            x *= _size;
+            y *= _size;
+            width *= _size;
+            height *= _size;
+
+            if (mod == 8) gridAmount++;
 
             SetLayoutBounds(view, new Rectangle(x, y, width, height));
         }
