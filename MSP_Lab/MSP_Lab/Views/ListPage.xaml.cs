@@ -59,32 +59,55 @@ namespace MSP_Lab.Views
 
             var text = search.Replace(' ', '+');
 
-            var response = await _client.GetAsync(string.Format(_searchUrl, text));
+            IEnumerable<Book> books = new List<Book>();
 
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                await DisplayAlert("Error", "Error", "Ok");
-                return;
+                var response = await _client.GetAsync(string.Format(_searchUrl, text));
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    await DisplayAlert("Error", "Error", "Ok");
+                    return;
+                }
+
+                using var data = await response.Content.ReadAsStreamAsync();
+                using var streamReader = new StreamReader(data);
+                using var reader = new JsonTextReader(streamReader);
+
+                var a = await JObject.LoadAsync(reader);
+
+                books = a["books"].Select(v => new Book
+                {
+                    Title = (string)v["title"],
+                    Subtitle = (string)v["subtitle"],
+                    Isbn = (string)v["isbn13"],
+                    Price = decimal.TryParse((string)v["price"], NumberStyles.Currency, CultureInfo.CurrentCulture, out var t) ? (decimal?)t : null,
+                    Image = (string)v["image"]
+                });
+            }
+            catch
+            {
+                books = await App.Db.GetBooksBySearchStringAsync(text);
             }
 
-            using var data = await response.Content.ReadAsStreamAsync();
-            using var streamReader = new StreamReader(data);
-            using var reader = new JsonTextReader(streamReader);
+            Console.WriteLine($"!!!!!!!! {books.Count()}");
 
-            var a = await JObject.LoadAsync(reader);
-
-            var t = a["books"].Select(v => new Book
+            if (books.Count() == 0)
             {
-                Title = (string)v["title"],
-                Subtitle = (string)v["subtitle"],
-                Isbn = (string)v["isbn13"],
-                Price = decimal.TryParse((string)v["price"], NumberStyles.Currency, CultureInfo.CurrentCulture, out var t) ? (decimal?)t : null,
-                Image = (string)v["image"]
-            });
-
-            foreach(var b in t)
+                booksView.IsVisible = false;
+                notFound.IsVisible = true;
+            }
+            else
             {
-                AddBook(b);
+                booksView.IsVisible = true;
+                notFound.IsVisible = false;
+
+                foreach (var b in books)
+                {
+                    await App.Db.InsertBookAsync(b);
+                    AddBook(b);
+                }
             }
         }
 
@@ -92,6 +115,10 @@ namespace MSP_Lab.Views
         {
             var lv = (ListView)sender;
             var book = (Book)lv.SelectedItem;
+
+            BookDetails details = null;
+
+            string id = book.Isbn;
 
             try
             {
@@ -105,14 +132,12 @@ namespace MSP_Lab.Views
                 
                 var a = await JObject.LoadAsync(reader);
 
-                Console.WriteLine(a);
-
-                var details = new BookDetails
+                details = new BookDetails
                 {
-                    Authors = ((string)a["authors"])?.Split(',').Select(x => x.Trim()).ToArray(),
+                    Authors = (string)a["authors"],
                     Description = (string)a["desc"],
                     Image = (string)a["image"],
-                    Isbn = (string)a["isbn13"],
+                    Isbn = id,
                     Pages = int.Parse(((string)a["pages"])!),
                     Price = decimal.TryParse((string)a["price"], NumberStyles.Currency, CultureInfo.CurrentCulture, out var t) ? (decimal?)t : null,
                     Publisher = (string)a["publisher"],
@@ -121,13 +146,21 @@ namespace MSP_Lab.Views
                     Title = (string)a["title"],
                     Year = int.Parse(((string)a["year"])!)
                 };
-                
-                await Navigation.PushAsync(new BookInfoPage(details));
+
+                await App.Db.InsertDetailsAsync(details);
             }
-            catch (HttpRequestException)
+            catch
+            {
+                details = await App.Db.GetDetailsByIdAsync(id);
+            }
+
+            if (details is null)
             {
                 await DisplayAlert("Error", $"Details for book {book.Isbn} not found", "OK");
+                return;
             }
+
+            await Navigation.PushAsync(new BookInfoPage(details));
         }
 
         private void OnDelete(object sender, EventArgs e)

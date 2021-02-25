@@ -7,6 +7,7 @@
              Title="Галерея">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="icon_plus.png" Order="Primary" Clicked="OnAddItem"/>
+        <ToolbarItem IconImageSource="icon_refresh.png" Order="Primary" Clicked="OnRefresh"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>

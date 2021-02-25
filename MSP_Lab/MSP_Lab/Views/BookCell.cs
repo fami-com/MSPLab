@@ -49,7 +49,7 @@ namespace MSP_Lab.Views
         public string Image
         {
             get => (string)GetValue(ImageProperty);
-            set => SetValue(ImageProperty, value == "" ? null : value);
+            set => SetValue(ImageProperty, value);
         }
 
         protected override void OnBindingContextChanged()
@@ -62,7 +62,11 @@ namespace MSP_Lab.Views
                 _subtitleLabel.Text = Subtitle;
                 _priceLabel.Text = !(Price is null) ? $"${Price}" : "Invalid Price";
                 _isbnLabel.Text = Isbn;
-                _image.Source = ImageSource.FromUri(new Uri(Image));
+                _image.Source = new UriImageSource
+                {
+                    CachingEnabled = true,
+                    Uri = new Uri(Image)
+                };
             }
         }
 

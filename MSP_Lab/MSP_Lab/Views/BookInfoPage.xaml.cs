@@ -1,6 +1,7 @@
 ﻿using MSP_Lab.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -35,14 +36,18 @@ namespace MSP_Lab.Views
             bookTitle.Text = _details.Title;
             bookSubtitle.Text = _details.Subtitle;
             bookYear.Text = _details.Year.ToString();
-            bookAuthors.Text = "Authors: " + string.Join(", ", _details.Authors);
+            bookAuthors.Text = "Authors: " + _details.Authors;
             bookIsbn.Text = _details.Isbn;
             bookPages.Text = $"Pages: {_details.Pages}";
             bookPrice.Text = !(_details.Price is null) ? $"${_details.Price}" : "Invalid Price";
             bookPublisherInfo.Text = $"Published by {_details.Publisher}";
             bookDesc.Text = _details.Description;
             bookRating.Text = $"{_details.Rating}/5";
-            bookCover.Source = ImageSource.FromUri(new Uri(_details.Image));
+            bookCover.Source = new UriImageSource
+            {
+                CachingEnabled = true,
+                Uri = new Uri(_details.Image)
+            };
         }
     }
 }

@@ -23,6 +23,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Label x:Name="notFound" Text="No books found" FontSize="Large"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

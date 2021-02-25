@@ -43,6 +43,13 @@ namespace MSP_Lab.Views
             _imageAmount++;
         }
 
+        public void Clear()
+        {
+            Children.Clear();
+            _imageAmount = 0;
+            _gridAmount = 0;
+        }
+
         private void SetBounds(BindableObject view, int imageAmount, ref int gridAmount)
         {
             double x, y;
